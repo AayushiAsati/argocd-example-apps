@@ -9,9 +9,10 @@ spec:
   template:
     spec:
       containers:
-      - name: run-script
-        image: asatiaayushi/runscript
-        command: ["bin/sh" , "-c"]
-        args: ["sh","script.sh"]
-        restartPolicy: Never
+        - name: run-script
+          image: asatiaayushi/runscript
+          command:
+            - "sh"
+            - "script.sh"
+      restartPolicy: Never
   backoffLimit: 2

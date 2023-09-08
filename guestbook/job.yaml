@@ -12,6 +12,6 @@ spec:
       - name: run-script
         image: asatiaayushi/run-script   
         command: ["bin/sh" , "-c"]
-        args: ["script.sh"]
+        args: ["sh","script.sh"]
         restartPolicy: Never
   backoffLimit: 2

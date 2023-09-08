@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: after
+  generateName: run-script
   annotations:
     argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
@@ -9,8 +9,9 @@ spec:
   template:
     spec:
       containers:
-      - name: sleep
-        image: alpine:latest
-        command: ["sleep", "60"]
-      restartPolicy: Never
-  backoffLimit: 0
+      - name: run-script
+        image: asatiaayushi/run-script   
+        command: ["bin/sh" , "-c"]
+        args: ["script.sh"]
+        restartPolicy: Never
+  backoffLimit: 2

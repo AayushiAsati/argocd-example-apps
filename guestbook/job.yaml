@@ -12,7 +12,7 @@ spec:
         - name: run-script
           image: asatiaayushi/runscript
           command:
-            - "sh"
-            - "script.sh"
+         #   - "sh"
+         #   - "script.sh"
       restartPolicy: Never
   backoffLimit: 2

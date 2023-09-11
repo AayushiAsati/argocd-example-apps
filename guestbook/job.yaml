@@ -13,9 +13,25 @@ spec:
           image: amazon/aws-cli:latest
           command: ["sh","-c"]
           args: 
-          - aws configure set aws_access_key_id AKIAXCIAMRWLIU6WUM2R
-            aws configure set aws_secret_access_key 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
-            aws configure set region eu-west-1
-            aws configure set output json
+            - aws configure set aws_access_key_id ${aws_access_key_id}
+            - aws configure set aws_secret_access_key ${aws_secret_access_key}
+            - aws configure set region ${aws-cred}
+            - aws configure set output json
+      env: 
+        - name: aws_access_key_id
+          valueFrom: 
+            secretKeyRef: 
+              name: aws-cred
+              key:  aws_access_key_id
+        - name: aws_access_key_id
+          valueFrom: 
+            secretKeyRef: 
+              name: aws-cred
+              key: aws_secret_access_key
+        - name: aws_default_region
+          valueFrom: 
+            secretKeyRef: 
+              name: aws-cred
+              key: aws_default_region
       restartPolicy: Never
   backoffLimit: 2

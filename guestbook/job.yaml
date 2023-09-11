@@ -4,15 +4,21 @@ metadata:
   generateName: run-script
   annotations:
     argocd.argoproj.io/hook: PostSync
-    #argocd.argoproj.io/hook-delete-policy: HookSucceeded
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec:
   template:
     spec:
       containers:
-        - name: run-script
-          image: asatiaayushi/runscript
-          command:
-         #   - "sh"
-         #   - "script.sh"
-      restartPolicy: Never
+      - name: run-script
+        image: asatiaayushi/run-script   
+        command: ["bin/sh" , "-c"]
+        args: ["script.sh"]
+        volumeMounts: 
+          - mountPath: /data
+            name: aws-cli-data
+        restartPolicy: Never
+      volumes: 
+        - name: aws-cli-data
+          PersistentVolumeClaim: 
+            claimName: host-pvc
   backoffLimit: 2

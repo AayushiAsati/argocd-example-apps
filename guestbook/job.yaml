@@ -9,18 +9,13 @@ spec:
   template:
     spec:
       containers:
-        - name: run-script
-          image: asatiaayushi/runscript
-          command:
-         #   - "sh"
-         #   - "script.sh"
-         volumeMounts: 
-          - mountPath: /data
-            name: aws-cli-data
-        restartPolicy: Never
-      volumes: 
-        - name: aws-cli-data
-          PersistentVolumeClaim: 
-            claimName: host-pvc
+        - name: aws-cli
+          image: amazon/aws-cli:latest
+          command: ["sh","-c"]
+          args: 
+          - aws configure set aws_access_key_id AKIAXCIAMRWLIU6WUM2R
+            aws configure set aws_secret_access_key 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
+            aws configure set region eu-west-1
+            aws configure set output json
       restartPolicy: Never
   backoffLimit: 2

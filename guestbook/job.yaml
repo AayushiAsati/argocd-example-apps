@@ -10,27 +10,9 @@ spec:
     spec:
       containers:
         - name: aws-cli
-          image: asatiaayushi/runscript:latest
+          image: asatiaayushi/aws-cli-2
           command: 
-            - aws configure set aws_access_key_id ${aws_access_key_id}
-            - aws configure set aws_secret_access_key ${aws_secret_access_key}
-            - aws configure set region ${aws-cred}
-            - aws configure set output json
-      env: 
-        - name: aws_access_key_id
-          valueFrom: 
-            secretKeyRef: 
-              name: aws-cred
-              key:  aws_access_key_id
-        - name: aws_access_key_id
-          valueFrom: 
-            secretKeyRef: 
-              name: aws-cred
-              key: aws_secret_access_key
-        - name: aws_default_region
-          valueFrom: 
-            secretKeyRef: 
-              name: aws-cred
-              key: aws_default_region
+            - sh
+            - login_cli.sh
       restartPolicy: Never
   backoffLimit: 2

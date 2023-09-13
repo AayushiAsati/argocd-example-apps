@@ -12,7 +12,7 @@ spec:
         - name: script 
           hostPath:
             path: /data
-            type: directory
+            type: Directory
       containers:
         - name: aws-cli
           image: asatiaayushi/aws-cli-2
@@ -21,6 +21,6 @@ spec:
               mountPath: /app
           command: 
             - sh
-            - login_cli.sh
+            - /app/login_cli.sh
       restartPolicy: Never
   backoffLimit: 2 

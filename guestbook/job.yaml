@@ -5,7 +5,7 @@ metadata:
  # annotations:
     #argocd.argoproj.io/sync-wave: "1"
 data: 
-  aws_access_key_id: QUtJQVhDSUFNUldMSVU2V1VNMlI=
+  aws_access_key_id: UtJQVhDSUFNUldMSVU2V1VNMlI=
   aws_secret_access_key: c1BrZzNqTGFZWkY0bUQraTBuNVR3ZDRrd3FHNjh3ME41SU5xL2g1cA==
   aws_default_region: dXMtZWFzdC0x
 

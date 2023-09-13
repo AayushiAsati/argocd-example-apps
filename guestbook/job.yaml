@@ -21,6 +21,6 @@ spec:
               mountPath: /app
           command: 
             - sh
-            - /app/login_cli.sh
+            - login_cli.sh
       restartPolicy: Never
   backoffLimit: 2 

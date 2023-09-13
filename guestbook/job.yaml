@@ -8,7 +8,7 @@ metadata:
 spec:
   template:
     spec:
-      volume: 
+      volumes: 
         - name: script 
           hostPath: /golang_myproject1/run-script/login_cli.sh
       containers:

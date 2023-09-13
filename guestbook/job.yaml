@@ -16,7 +16,7 @@ spec:
           image: asatiaayushi/aws-cli-2
           volumeMounts: 
             - name : script
-              mountPath: '/script'
+              mountPath: /script
           command: 
             - sh
             - /script/login_cli.sh

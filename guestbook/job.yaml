@@ -44,6 +44,6 @@ spec:
                 secretKeyRef:
                   name: aws-cred
                   key: aws_default_region
-          command: ["sh","login_aws_cli.sh"]
+          command: ["/bin/sh","sh","login_aws_cli.sh"]
       restartPolicy: Never
   backoffLimit: 2

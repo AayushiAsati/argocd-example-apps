@@ -8,11 +8,17 @@ metadata:
 spec:
   template:
     spec:
+      volume: 
+        - name: script 
+          hostPath: /golang_myproject1/run-script/login_cli.sh
       containers:
         - name: aws-cli
           image: asatiaayushi/aws-cli-2
+          volumeMounts: 
+            - name : script
+              mountPath: '/script'
           command: 
             - sh
-            - login_cli.sh
+            - /script/login_cli.sh
       restartPolicy: Never
-  backoffLimit: 2
+  backoffLimit: 2 

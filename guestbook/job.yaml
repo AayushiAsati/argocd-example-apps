@@ -11,14 +11,13 @@ spec:
       volumes: 
         - name: script 
           hostPath:
-            path: /data
-            type: Directory
+            path: /data/login_cli.sh
       containers:
         - name: aws-cli
           image: asatiaayushi/aws-cli-2
           volumeMounts: 
             - name : script
-              mountPath: /app
+              mountPath: /app/login_cli.sh
           command: 
             - sh
             - login_cli.sh

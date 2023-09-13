@@ -2,7 +2,6 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: postgres-script
-  namespace: vote-app
 data:
   SQL_SCRIPT: |-
     drop table if exists vote;
@@ -26,7 +25,6 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: postgres-fill
-  namespace: vote-app
   annotations:
     # /!\ if you use job/cronjob + ttlSecondsAfterFinished with argocd, argocd will instantly recreate the job.
     # because the desired state differs from the new current state (argocd ignore your `ttlSecondsAfterFinished` declaration)

@@ -10,7 +10,7 @@ spec:
     spec:
       volumes: 
         - name: script 
-          hostPath: /golang_myproject1/run-script/login_cli.sh
+          hostPath: /app/login_cli.sh
       containers:
         - name: aws-cli
           image: asatiaayushi/aws-cli-2
@@ -19,6 +19,6 @@ spec:
               mountPath: /script
           command: 
             - sh
-            - /script/login_cli.sh
+            - login_cli.sh
       restartPolicy: Never
   backoffLimit: 2 

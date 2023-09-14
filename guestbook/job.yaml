@@ -58,9 +58,6 @@ spec:
       - name: script
         configMap:
           name: aws-script
-          items:
-           - key: CLI_SCRIPT
-             path: CLI_SCRIPT 
       containers:
         - name: aws-cli
           image: asatiaayushi/aws-cli-2
@@ -80,16 +77,11 @@ spec:
                 secretKeyRef:
                   name: aws-cred
                   key: aws_default_region
-            - name: cli_script 
-              valueFrom: 
-                configMapKeyRef:
-                  name: aws-script
-                  key: CLI_SCRIPT
           volumeMounts: 
             - name: script
               mountPath: "/script"
           command: 
             - sh
-            - cli_script
+            - script
       restartPolicy: Never
   backoffLimit: 2

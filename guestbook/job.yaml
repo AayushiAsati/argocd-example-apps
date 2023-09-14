@@ -26,7 +26,7 @@ data:
   CLI_SCRIPT: |-
     aws_access_key_id=$(${aws_access_key_id}| tr -d '"' |base64 --decode)
     aws_secret_access_key=$($aws_secret_access_key}| tr -d '"' |base64 --decode)
-    aws_default_region=$(${aws_default_region}| tr -d '"' |base64 --decode)
+    aws_default_region=$({aws_default_region}| tr -d '"' |base64 --decode)
 
     echo ${aws_access_key_id} 
     echo ${aws_secret_access_key}

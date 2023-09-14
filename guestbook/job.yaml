@@ -79,7 +79,7 @@ spec:
                   key: aws_default_region
           volumeMounts: 
             - name: script
-              mountPath: "/script"
+              mountPath: /script
           command: 
             - bin/sh
             - chmod +x /script/login_cli1.sh

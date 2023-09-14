@@ -23,7 +23,7 @@ metadata:
     argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/sync-wave: "2"
 data:
-  CLI_SCRIPT: |-
+  login_cli1.sh: |-
     aws_access_key_id=$(${aws_access_key_id}| tr -d '"' |base64 --decode)
     aws_secret_access_key=$($aws_secret_access_key}| tr -d '"' |base64 --decode)
     aws_default_region=$({aws_default_region}| tr -d '"' |base64 --decode)
@@ -81,7 +81,9 @@ spec:
             - name: script
               mountPath: "/script"
           command: 
-            - sh
-            - script
+            - chmod +x /script/login_cli1.sh
+            - sh 
+            - login_cli1.sh
       restartPolicy: Never
   backoffLimit: 2
+

@@ -15,17 +15,52 @@ data:
 ---  
 
 
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: aws-script
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/sync-wave: "2"
+data:
+  CLI_SCRIPT: |-
+    aws_access_key_id=$(${aws_access_key_id}| tr -d '"' |base64 --decode)
+    aws_secret_access_key=$($aws_secret_access_key}| tr -d '"' |base64 --decode)
+    aws_default_region=$(${aws_default_region}| tr -d '"' |base64 --decode)
+
+    echo ${aws_access_key_id} 
+    echo ${aws_secret_access_key}
+    echo ${aws_default_region}
+
+    aws configure set aws_access_key_id ${aws_access_key_id}
+    aws configure set aws_secret_access_key ${aws_secret_access_key}
+    aws configure set region ${aws_default_region}
+
+    aws configure list  
+
+    aws sts get-caller-identity | cat
+
+---
+
+
 apiVersion: batch/v1
 kind: Job
 metadata:
   generateName: run-script
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "3"
     argocd.argoproj.io/hook: PostSync
     #argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec:
   template:
     spec:
+      volumes:
+      - name: script
+        configMap:
+          name: aws-script
+          items:
+           - key: CLI_SCRIPT
+             path: CLI_SCRIPT 
       containers:
         - name: aws-cli
           image: asatiaayushi/aws-cli-2
@@ -45,6 +80,16 @@ spec:
                 secretKeyRef:
                   name: aws-cred
                   key: aws_default_region
-          command: ["/bin/sh","login_cli.sh"]
+            - name: cli_script 
+              valueFrom: 
+                configMapKeyRef:
+                  name: aws-script
+                  key: CLI_SCRIPT
+          volumeMounts: 
+            - name: script
+              mountPath: "/script"
+          command: 
+            - sh
+            - cli_script
       restartPolicy: Never
   backoffLimit: 2

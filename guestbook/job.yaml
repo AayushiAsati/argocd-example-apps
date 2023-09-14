@@ -80,8 +80,7 @@ spec:
           volumeMounts: 
             - name: script
               mountPath: /script
-          command: 
-            - bin/sh
+          command:
             - chmod +x /script/login_cli1.sh
             - sh 
             - login_cli1.sh
